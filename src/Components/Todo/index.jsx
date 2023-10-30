@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
+import Header from '../Header';
 
 import { v4 as uuid } from 'uuid';
 
 const Todo = () => {
+  const { display, isCompleted } = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: 4,
   });
@@ -45,6 +48,7 @@ const Todo = () => {
 
   return (
     <>
+      <Header />
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
 
