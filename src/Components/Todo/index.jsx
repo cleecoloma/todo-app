@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
 import Header from '../Header';
+import List from '../List';
 import { TextInput, Button, Group, Box, Slider } from '@mantine/core';
 
 import { v4 as uuid } from 'uuid';
@@ -54,6 +55,7 @@ const Todo = () => {
         <h2>Add To Do Item</h2>
         <Box maw={340} mx='auto'>
           <TextInput
+            name='text'
             label='To Do Item'
             placeholder='Item Details'
             onChange={handleChange}
@@ -103,6 +105,9 @@ const Todo = () => {
           </div>
           <hr />
         </div>
+      ))}
+      {list.map((item, index) => (
+        <List key={index} list={item} toggleComplete={toggleComplete} />
       ))}
     </>
   );

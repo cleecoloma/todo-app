@@ -1,42 +1,38 @@
 import React, { useState } from 'react';
+import { Card, Text, Badge, Button, Group } from '@mantine/core';
 
-function List() {
-  const [list, setList] = useState([]);
-
-  function toggleComplete(id) {
-    const items = list.map((item) => {
-      if (item.id === id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
-
-    setList(items);
-  }
-
-  function deleteItem(id) {
-    const items = list.filter((item) => item.id !== id);
-    setList(items);
-  }
+function List(props) {
+  const { list, toggleComplete } = props;
 
   return (
-    <>
-      {list.map((item) => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p>
-            <small>Assigned to: {item.assignee}</small>
-          </p>
-          <p>
-            <small>Difficulty: {item.difficulty}</small>
-          </p>
-          <div onClick={() => toggleComplete(item.id)}>
-            Complete: {item.complete.toString()}
-          </div>
-          <hr />
-        </div>
-      ))}
-    </>
+    <Card shadow='sm' padding='lg' radius='md' withBorder>
+      <Badge color='pink' variant='light'>
+        Complete: {list.complete.toString()}
+      </Badge>
+
+      <Text mt='md' fw={500}>
+        {list.assignee}
+      </Text>
+
+      <Text mt='sm' size='sm' c='dimmed'>
+        {list.text}
+      </Text>
+
+      <Text mt='sm' size='sm' c='dimmed'>
+        Difficulty: {list.difficulty}
+      </Text>
+
+      <Button
+        onClick={() => toggleComplete(list.id)}
+        variant='light'
+        color='blue'
+        fullWidth
+        mt='md'
+        radius='md'
+      >
+        Toggle Complete
+      </Button>
+    </Card>
   );
 }
 
