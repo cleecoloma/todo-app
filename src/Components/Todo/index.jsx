@@ -45,10 +45,6 @@ const Todo = () => {
 
   return (
     <>
-      <header data-testid='todo-header'>
-        <h1 data-testid='todo-h1'>To Do List: {incomplete} items pending</h1>
-      </header>
-
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
 
