@@ -3,3 +3,17 @@ h2 {
   max-width: 340px;
   margin: 0 auto;
 }
+
+.todo-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 20rem 0;
+  background-color: #3498db;
+  color: #fff;
+  height: 80px;
+}
+
+.todo-h1 {
+  font-size: 24px; /* Adjust font size as needed */
+}

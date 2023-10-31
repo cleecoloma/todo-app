@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
-import Header from '../Header';
 import Footer from '../Footer';
 import List from '../List';
 import {
@@ -64,8 +63,15 @@ const Todo = () => {
   }, [list]);
 
   return (
-    <div className="todo-container">
-      <Header incomplete={incomplete} />
+    <div className='todo-container'>
+      <div
+        className='todo-header'
+        data-testid='todo-header'
+      >
+        <h1 className='todo-h1' data-testid='todo-h1'>
+          To Do List: {incomplete} items pending
+        </h1>
+      </div>
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
         <Box maw={340} mx='auto'>
