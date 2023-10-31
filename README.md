@@ -38,6 +38,12 @@ To get started with the application, follow these steps:
 ## PR link
 [PR Link Class 31](https://github.com/cleecoloma/todo-app/pull/1)
 
+## Questions
+1. Describe how global state is consumed by the components.
+> Components consume global state using the useContext hook by specifying the context they want to access, and then they can access and modify the global state values stored in that context.
+2. Describe the operation of the hook: `useForm()`.
+> The `useForm` hook is designed to handle form-related logic. It maintains a state object called `values` to store form input values and provides functions like `handleChange` to update these values in response to user input and `handleSubmit` to submit the form data by invoking a callback function passed as an argument. It also allows setting default form values when the component is mounted or when `defaultValues` change, ensuring the form remains synchronized with the provided default values.
+
 ## Contributors
 * Chester Lee Coloma
 * ChatGPT (used for most tests)
