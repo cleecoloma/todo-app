@@ -69,12 +69,14 @@ const Todo = () => {
         <h2>Add To Do Item</h2>
         <Box maw={340} mx='auto'>
           <TextInput
+            data-testid='todo-input'
             name='text'
             label='To Do Item'
             placeholder='Item Details'
             onChange={handleChange}
           />
           <TextInput
+            data-testid='assign-input'
             mt='md'
             label='Assigned To'
             name='assignee'
@@ -98,7 +100,7 @@ const Todo = () => {
             ]}
           />
           <Group justify='center' mt='xl'>
-            <Button variant='outline' type='submit'>
+            <Button data-testid='submit-button' variant='outline' type='submit'>
               Add Item
             </Button>
           </Group>
