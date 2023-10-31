@@ -1,19 +1,39 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
-
+import Header from '../Header';
+import Footer from '../Footer';
+import List from '../List';
+import {
+  TextInput,
+  Button,
+  Group,
+  Box,
+  Slider,
+  Pagination,
+} from '@mantine/core';
 import { v4 as uuid } from 'uuid';
+import './Todo.scss';
 
 const Todo = () => {
+  const { display, isCompleted } = useContext(SettingsContext);
   const [defaultValues] = useState({
     difficulty: 4,
   });
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  // These are for the Pagination Component
+  const itemsPerPage = display;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const itemsToDisplay = list.slice(startIndex, endIndex);
 
   function addItem(item) {
     item.id = uuid();
-    item.complete = false;
+    item.complete = isCompleted;
     console.log(item);
     setList([...list, item]);
   }
@@ -44,67 +64,70 @@ const Todo = () => {
   }, [list]);
 
   return (
-    <>
-      <header data-testid='todo-header'>
-        <h1 data-testid='todo-h1'>To Do List: {incomplete} items pending</h1>
-      </header>
-
+    <div className="todo-container">
+      <Header incomplete={incomplete} />
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
-
-        <label>
-          <span>To Do Item</span>
-          <input
-            onChange={handleChange}
+        <Box maw={340} mx='auto'>
+          <TextInput
+            data-testid='todo-input'
             name='text'
-            type='text'
+            label='To Do Item'
             placeholder='Item Details'
-          />
-        </label>
-
-        <label>
-          <span>Assigned To</span>
-          <input
             onChange={handleChange}
-            name='assignee'
-            type='text'
-            placeholder='Assignee Name'
           />
-        </label>
-
-        <label>
-          <span>Difficulty</span>
-          <input
+          <TextInput
+            data-testid='assign-input'
+            mt='md'
+            label='Assigned To'
+            name='assignee'
+            placeholder='Assignee Name'
+            onChange={handleChange}
+          />
+          <Slider
+            color='blue'
             onChange={handleChange}
             defaultValue={defaultValues.difficulty}
-            type='range'
             min={1}
             max={5}
             name='difficulty'
+            step={1}
+            marks={[
+              { value: 1, label: '1' },
+              { value: 2, label: '2' },
+              { value: 3, label: '3' },
+              { value: 4, label: '4' },
+              { value: 5, label: '5' },
+            ]}
           />
-        </label>
-
-        <label>
-          <button type='submit'>Add Item</button>
-        </label>
+          <Group justify='center' mt='xl'>
+            <Button data-testid='submit-button' variant='outline' type='submit'>
+              Add Item
+            </Button>
+          </Group>
+        </Box>
       </form>
 
-      {list.map((item) => (
-        <div key={item.id}>
-          <p>{item.text}</p>
-          <p>
-            <small>Assigned to: {item.assignee}</small>
-          </p>
-          <p>
-            <small>Difficulty: {item.difficulty}</small>
-          </p>
-          <div onClick={() => toggleComplete(item.id)}>
-            Complete: {item.complete.toString()}
-          </div>
-          <hr />
-        </div>
-      ))}
-    </>
+      {itemsToDisplay
+        .filter((item) => !item.complete)
+        .map((item, index) => (
+          <List key={index} list={item} toggleComplete={toggleComplete} />
+        ))}
+
+      <Pagination
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          marginTop: '2rem',
+        }}
+        value={currentPage}
+        onChange={setCurrentPage}
+        total={Math.ceil(list.length / itemsPerPage)}
+        size='sm'
+      />
+      <Footer />
+    </div>
   );
 };
 

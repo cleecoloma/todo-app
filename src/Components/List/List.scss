@@ -1,0 +1,31 @@
+.list-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-container {
+  width: 60%;
+  margin-top: 2rem;
+}
+
+.badge {
+  background-color: pink;
+  color: white;
+}
+
+.assignee {
+  font-weight: 500;
+}
+
+.text {
+  color: dimmed;
+}
+
+.difficulty {
+  color: dimmed;
+}
+
+.complete-button {
+  margin-top: 1rem;
+}
