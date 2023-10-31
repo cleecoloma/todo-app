@@ -1,38 +1,45 @@
 import React from 'react';
 import { Card, Text, Badge, Button } from '@mantine/core';
+import './List.scss';
 
 function List(props) {
   const { list, toggleComplete } = props;
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-    <Card style={{ width:'60%', marginTop:'2rem' }} shadow='sm' padding='lg' radius='md' withBorder>
-      <Badge color='pink' variant='light'>
-        Complete: {list.complete.toString()}
-      </Badge>
-
-      <Text mt='md' fw={500}>
-        {list.assignee}
-      </Text>
-
-      <Text mt='sm' size='sm' c='dimmed'>
-        {list.text}
-      </Text>
-
-      <Text mt='sm' size='sm' c='dimmed'>
-        Difficulty: {list.difficulty}
-      </Text>
-
-      <Button
-        onClick={() => toggleComplete(list.id)}
-        variant='light'
-        color='blue'
-        mt='md'
+    <div className='list-container'>
+      <Card
+        className='card-container'
+        shadow='sm'
+        padding='lg'
         radius='md'
+        withBorder
       >
-        Toggle Complete
-      </Button>
-    </Card>
+        <Badge className='badge' variant='light'>
+          Complete: {list.complete.toString()}
+        </Badge>
+
+        <Text className='assignee' mt='md' fw={500}>
+          {list.assignee}
+        </Text>
+
+        <Text className='text' mt='sm' size='sm' c='dimmed'>
+          {list.text}
+        </Text>
+
+        <Text className='difficulty' mt='sm' size='sm' c='dimmed'>
+          Difficulty: {list.difficulty}
+        </Text>
+
+        <Button
+          onClick={() => toggleComplete(list.id)}
+          variant='light'
+          color='blue'
+          className='complete-button'
+          radius='md'
+        >
+          Toggle Complete
+        </Button>
+      </Card>
     </div>
   );
 }

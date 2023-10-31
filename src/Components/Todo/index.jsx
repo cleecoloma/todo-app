@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
 import Header from '../Header';
+import Footer from '../Footer';
 import List from '../List';
 import {
   TextInput,
@@ -11,8 +12,8 @@ import {
   Slider,
   Pagination,
 } from '@mantine/core';
-
 import { v4 as uuid } from 'uuid';
+import './Todo.scss';
 
 const Todo = () => {
   const { display, isCompleted } = useContext(SettingsContext);
@@ -63,7 +64,7 @@ const Todo = () => {
   }, [list]);
 
   return (
-    <>
+    <div className="todo-container">
       <Header incomplete={incomplete} />
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
@@ -125,7 +126,8 @@ const Todo = () => {
         total={Math.ceil(list.length / itemsPerPage)}
         size='sm'
       />
-    </>
+      <Footer />
+    </div>
   );
 };
 
