@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import Footer from '../Footer';
 import { Switch, NumberInput, Card, Button } from '@mantine/core';
-import './Settings.scss'; // Import the SCSS file
+import { Link } from 'react-router-dom';
+import './Settings.scss';
 
 function Settings() {
   const { display, isCompleted, updateDisplay, toggleIsCompleted } =
@@ -40,7 +41,13 @@ function Settings() {
           />
         </div>
 
-        <Button className='settings-button'>Show Updated Todo</Button>
+        <Button
+          className='settings-button'
+          component={Link}
+          to='/'
+        >
+          Show Updated Todo
+        </Button>
       </Card>
       <Card
         className='card-container' // Add the class for styling
