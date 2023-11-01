@@ -1,5 +1,23 @@
 h2 {
   text-align: center;
-  max-width: 340px;
+  max-width: 60%;
   margin: 0 auto;
+}
+
+.todo-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #7bbae5;
+  color: #fff;
+}
+
+.todo-h1 {
+  font-size: 22px;
+}
+
+.todo-container {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 6rem;
 }

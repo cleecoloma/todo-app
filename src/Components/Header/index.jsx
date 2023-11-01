@@ -1,12 +1,24 @@
 import React from 'react';
 import './Header.scss';
+import { Navbar, Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-function Header(props) {
-   const { incomplete } = props;
+function Header() {
   return (
-    <header className='todo-header' data-testid='todo-header'>
-      <h1 className='todo-h1' data-testid='todo-h1'>To Do List: {incomplete} items pending</h1>
-    </header>
+    <Navbar className='custom-navbar' expand='lg'>
+      <Nav className='nav'>
+        <Nav.Item className='nav-item'>
+          <Link className='nav-link custom-nav-link' to='/'>
+            Home
+          </Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Link className='nav-link custom-nav-link' to='/Settings'>
+            Settings
+          </Link>
+        </Nav.Item>
+      </Nav>
+    </Navbar>
   );
 }
 

@@ -1,0 +1,32 @@
+// Settings.scss
+.card-container {
+  max-width: 600px;
+  margin: 3rem auto 0; 
+  padding: 20px;
+  text-align: center;
+}
+
+.toggle-todo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-todo p {
+  margin-right: 1rem;
+}
+
+.toggle-display {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.toggle-display p {
+  margin-right: 1rem;
+}
+
+.settings-button {
+  margin: 1rem 2rem 0;
+  display: block;
+}

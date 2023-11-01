@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
-import Header from '../Header';
 import Footer from '../Footer';
 import List from '../List';
 import {
@@ -33,7 +32,7 @@ const Todo = () => {
 
   function addItem(item) {
     item.id = uuid();
-    item.complete = isCompleted;
+    item.complete = false;
     console.log(item);
     setList([...list, item]);
   }
@@ -64,8 +63,16 @@ const Todo = () => {
   }, [list]);
 
   return (
-    <div className="todo-container">
-      <Header incomplete={incomplete} />
+    <div className='todo-container'>
+      <div
+        className='todo-header'
+        data-testid='todo-header'
+      >
+        <h1 className='todo-h1' data-testid='todo-h1'>
+          To Do List: {incomplete} item(s) pending
+        </h1>
+        {console.log(incomplete)}
+      </div>
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
         <Box maw={340} mx='auto'>
@@ -108,11 +115,13 @@ const Todo = () => {
         </Box>
       </form>
 
-      {itemsToDisplay
-        .filter((item) => !item.complete)
+      { isCompleted ? itemsToDisplay
         .map((item, index) => (
           <List key={index} list={item} toggleComplete={toggleComplete} />
-        ))}
+        )) : itemsToDisplay
+        .filter((item) => !item.complete)
+        .map((item, index) => (
+          <List key={index} list={item} toggleComplete={toggleComplete} />))}
 
       <Pagination
         style={{
