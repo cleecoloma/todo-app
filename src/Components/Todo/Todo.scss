@@ -13,5 +13,11 @@ h2 {
 }
 
 .todo-h1 {
-  font-size: 22px; /* Adjust font size as needed */
+  font-size: 22px;
+}
+
+.todo-container {
+  height: 100%;
+  overflow-y: auto;
+  padding-bottom: 6rem;
 }
