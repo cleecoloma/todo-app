@@ -32,7 +32,7 @@ const Todo = () => {
 
   function addItem(item) {
     item.id = uuid();
-    item.complete = isCompleted;
+    item.complete = false;
     console.log(item);
     setList([...list, item]);
   }
@@ -69,8 +69,9 @@ const Todo = () => {
         data-testid='todo-header'
       >
         <h1 className='todo-h1' data-testid='todo-h1'>
-          To Do List: {incomplete} items pending
+          To Do List: {incomplete} item(s) pending
         </h1>
+        {console.log(incomplete)}
       </div>
       <form onSubmit={handleSubmit}>
         <h2>Add To Do Item</h2>
@@ -114,11 +115,13 @@ const Todo = () => {
         </Box>
       </form>
 
-      {itemsToDisplay
-        .filter((item) => !item.complete)
+      { isCompleted ? itemsToDisplay
         .map((item, index) => (
           <List key={index} list={item} toggleComplete={toggleComplete} />
-        ))}
+        )) : itemsToDisplay
+        .filter((item) => !item.complete)
+        .map((item, index) => (
+          <List key={index} list={item} toggleComplete={toggleComplete} />))}
 
       <Pagination
         style={{
