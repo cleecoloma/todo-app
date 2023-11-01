@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import Footer from '../Footer';
-import { Switch, NumberInput } from '@mantine/core';
+import { Switch, NumberInput, Card, Button } from '@mantine/core';
+import './Settings.scss'; // Import the SCSS file
 
 function Settings() {
   const { display, isCompleted, updateDisplay, toggleIsCompleted } =
@@ -17,19 +18,41 @@ function Settings() {
 
   return (
     <>
-      <div>
-        <p>Display: {display}</p>
-        <p>Is Completed: {isCompleted ? 'Yes' : 'No'}</p>
-        <button onClick={handleDisplayChange}>Change Display</button>
-        <button onClick={handleToggleIsCompleted}>Toggle Is Completed</button>
-        <Switch checked={isCompleted} onChange={handleToggleIsCompleted} />
-        <NumberInput
-          defaultValue={display}
-          min={1}
-          max={5}
-          onChange={handleDisplayChange}
-        />
-      </div>
+      <Card
+        className='card-container' // Add the class for styling
+        shadow='sm'
+        padding='lg'
+        radius='md'
+        withBorder
+      >
+        <h2>Update Settings</h2>
+        <div className='toggle-todo'>
+          <p>Show/Hide Completed ToDos:</p>
+          <Switch checked={isCompleted} onChange={handleToggleIsCompleted} />
+        </div>
+        <div className='toggle-display'>
+          <p>Update # Of Displayed Items:</p>
+          <NumberInput
+            defaultValue={display}
+            min={1}
+            max={5}
+            onChange={handleDisplayChange}
+          />
+        </div>
+
+        <Button className='settings-button'>Show Updated Todo</Button>
+      </Card>
+      <Card
+        className='card-container' // Add the class for styling
+        shadow='sm'
+        padding='lg'
+        radius='md'
+        withBorder
+      >
+        <h2>Updated Settings</h2>
+        <p>Completed ToDos: {isCompleted ? ' Show' : ' Hide'}</p>
+        <p>Items to Display Page: {display}</p>
+      </Card>
       <Footer />
     </>
   );
