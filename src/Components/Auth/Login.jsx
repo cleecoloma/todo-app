@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { When } from 'react-if';
 import { AuthContext } from '../../Context/Auth';
+import { Button, Input } from '@mantine/core';
+import './Login.scss';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -24,22 +26,26 @@ function Login() {
   return (
     <>
       <When condition={auth.loggedIn}>
-        <button onClick={auth.logout}>Log Out</button>
+        <Button onClick={auth.logout} color='gray'>
+          Log Out
+        </Button>
       </When>
 
       <When condition={!auth.loggedIn}>
-        <form onSubmit={handleSubmit}>
-          <input
+        <form id='login-form' onSubmit={handleSubmit}>
+          <Input
+            className='input'
             placeholder='Username'
             name='username'
             onChange={handleChange}
           />
-          <input
+          <Input
+            className='input'
             placeholder='Password'
             name='password'
             onChange={handleChange}
           />
-          <button>Login</button>
+          <Button type='submit'>Login</Button>
         </form>
       </When>
     </>

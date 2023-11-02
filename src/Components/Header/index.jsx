@@ -2,6 +2,7 @@ import React from 'react';
 import './Header.scss';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Login from '../Auth/Login';
 
 function Header() {
   return (
@@ -18,6 +19,7 @@ function Header() {
           </Link>
         </Nav.Item>
       </Nav>
+      <Login />
     </Navbar>
   );
 }
