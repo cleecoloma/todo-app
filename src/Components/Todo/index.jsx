@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 import { v4 as uuid } from 'uuid';
 import './Todo.scss';
+import Auth from '../Auth/Auth';
 
 const Todo = () => {
   const { display, isCompleted } = useContext(SettingsContext);
@@ -63,64 +64,69 @@ const Todo = () => {
 
   return (
     <div className='todo-container'>
-      <div
-        className='todo-header'
-        data-testid='todo-header'
-      >
+      <div className='todo-header' data-testid='todo-header'>
         <h1 className='todo-h1' data-testid='todo-h1'>
           To Do List: {incomplete} item(s) pending
         </h1>
         {console.log(incomplete)}
       </div>
-      <form onSubmit={handleSubmit}>
-        <h2>Add To Do Item</h2>
-        <Box maw={340} mx='auto'>
-          <TextInput
-            data-testid='todo-input'
-            name='text'
-            label='To Do Item'
-            placeholder='Item Details'
-            onChange={handleChange}
-          />
-          <TextInput
-            data-testid='assign-input'
-            mt='md'
-            label='Assigned To'
-            name='assignee'
-            placeholder='Assignee Name'
-            onChange={handleChange}
-          />
-          <Slider
-            color='blue'
-            onChange={handleChange}
-            defaultValue={defaultValues.difficulty}
-            min={1}
-            max={5}
-            name='difficulty'
-            step={1}
-            marks={[
-              { value: 1, label: '1' },
-              { value: 2, label: '2' },
-              { value: 3, label: '3' },
-              { value: 4, label: '4' },
-              { value: 5, label: '5' },
-            ]}
-          />
-          <Group justify='center' mt='xl'>
-            <Button data-testid='submit-button' variant='outline' type='submit'>
-              Add Item
-            </Button>
-          </Group>
-        </Box>
-      </form>
+      <Auth capability={'create'}>
+        <form onSubmit={handleSubmit}>
+          <h2>Add To Do Item</h2>
+          <Box maw={340} mx='auto'>
+            <TextInput
+              data-testid='todo-input'
+              name='text'
+              label='To Do Item'
+              placeholder='Item Details'
+              onChange={handleChange}
+            />
+            <TextInput
+              data-testid='assign-input'
+              mt='md'
+              label='Assigned To'
+              name='assignee'
+              placeholder='Assignee Name'
+              onChange={handleChange}
+            />
+            <Slider
+              color='blue'
+              onChange={handleChange}
+              defaultValue={defaultValues.difficulty}
+              min={1}
+              max={5}
+              name='difficulty'
+              step={1}
+              marks={[
+                { value: 1, label: '1' },
+                { value: 2, label: '2' },
+                { value: 3, label: '3' },
+                { value: 4, label: '4' },
+                { value: 5, label: '5' },
+              ]}
+            />
+            <Group justify='center' mt='xl'>
+              <Button
+                data-testid='submit-button'
+                variant='outline'
+                type='submit'
+              >
+                Add Item
+              </Button>
+            </Group>
+          </Box>
+        </form>
+      </Auth>
 
-      { isCompleted ? itemsToDisplay
-        .map((item, index) => (
-          <List key={index} list={item} toggleComplete={toggleComplete} />
-        )) : itemsToDisplay
-        .filter((item) => !item.complete)
-        .map((item, index) => (
-          <List key={index} list={item} toggleComplete={toggleComplete} />))}
+      {isCompleted
+        ? itemsToDisplay.map((item, index) => (
+            <List key={index} list={item} toggleComplete={toggleComplete} />
+          ))
+        : itemsToDisplay
+            .filter((item) => !item.complete)
+            .map((item, index) => (
+              <List key={index} list={item} toggleComplete={toggleComplete} />
+            ))}
 
       <Pagination
         style={{

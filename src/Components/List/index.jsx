@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Text, Badge, Button } from '@mantine/core';
 import './List.scss';
+import Auth from '../Auth/Auth';
 
 function List(props) {
   const { list, toggleComplete } = props;
@@ -30,15 +31,17 @@ function List(props) {
           Difficulty: {list.difficulty}
         </Text>
 
-        <Button
-          onClick={() => toggleComplete(list.id)}
-          variant='light'
-          color='blue'
-          className='complete-button'
-          radius='md'
-        >
-          Toggle Complete
-        </Button>
+        <Auth capability={'update'}>
+          <Button
+            onClick={() => toggleComplete(list.id)}
+            variant='light'
+            color='blue'
+            className='complete-button'
+            radius='md'
+          >
+            Toggle Complete
+          </Button>
+        </Auth>
       </Card>
     </div>
   );

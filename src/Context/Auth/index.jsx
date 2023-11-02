@@ -99,6 +99,8 @@ function AuthProvider(props) {
     validateToken(token);
   }, []);
 
+  console.log("HERES THE USER ", state.user.name, state.user.capabilities)
+
   return (
     <AuthContext.Provider value={{ ...state, can, login, logout }}>
       {props.children}

@@ -23,9 +23,14 @@ function App() {
                   exact
                   path='/'
                   element={
-                    <Auth capability={'read'}>
-                      <Todo />
-                    </Auth>
+                    <>
+                      <Auth capability={'read'}>
+                        <Todo />
+                      </Auth>
+                      <Auth capability={'create'}>
+                        <Todo />
+                      </Auth>
+                    </>
                   }
                 ></Route>
                 <Route exact path='/Settings' element={<Settings />}></Route>
