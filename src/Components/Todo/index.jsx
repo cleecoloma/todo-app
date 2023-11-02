@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { SettingsContext } from '../../Context/Settings';
 import useForm from '../../hooks/form';
-import Footer from '../Footer';
 import List from '../List';
 import {
   TextInput,
@@ -135,7 +134,6 @@ const Todo = () => {
         total={Math.ceil(list.length / itemsPerPage)}
         size='sm'
       />
-      <Footer />
     </div>
   );
 };

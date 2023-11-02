@@ -39,7 +39,11 @@ function AuthProvider(props) {
   });
 
   const can = (capability) => {
-    return state.user.capabilities.includes(capability);
+    return (
+      state.user &&
+      state.user.capabilities &&
+      state.user.capabilities.includes(capability)
+    );
   };
 
   const login = async (username, password) => {
@@ -61,12 +65,19 @@ function AuthProvider(props) {
   };
 
   const validateToken = (token) => {
+    if (!token) {
+      // Handle the case where the token is null (initial render)
+      setLoginState(false, null, {});
+      return;
+    }
+
     try {
       let validUser = jwtDecode(token);
       setLoginState(true, token, validUser);
     } catch (e) {
-      setLoginState(false, null, {}, e);
       console.log('Token Validation Error', e);
+      console.log('Invalid Token:', token);
+      setLoginState(false, null, {}, e);
     }
   };
 

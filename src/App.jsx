@@ -7,6 +7,8 @@ import Settings from '../src/Components/Settings';
 import Todo from './Components/Todo';
 import '@mantine/core/styles.css';
 import AuthProvider from './Context/Auth';
+import Footer from './Components/Footer';
+import Auth from './Components/Auth/Auth';
 
 function App() {
   return (
@@ -17,9 +19,19 @@ function App() {
             <Router>
               <Header />
               <Routes>
-                <Route exact path='/' element={<Todo />}></Route>
+                <Route
+                  exact
+                  path='/'
+                  element={
+                    <Auth capability={'read'}>
+                      <Todo />
+                    </Auth>
+                  }
+                ></Route>
                 <Route exact path='/Settings' element={<Settings />}></Route>
               </Routes>
+
+              <Footer />
             </Router>
           </AuthProvider>
         </SettingsProvider>
