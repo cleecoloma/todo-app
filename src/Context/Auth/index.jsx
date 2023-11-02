@@ -29,9 +29,9 @@ const testUsers = {
   },
 };
 
-export const LoginContext = React.createContext();
+export const AuthContext = React.createContext();
 
-class LoginProvider extends React.Component {
+class AuthProvider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -90,11 +90,11 @@ class LoginProvider extends React.Component {
 
   render() {
     return (
-      <LoginContext.Provider value={this.state}>
+      <AuthContext.Provider value={this.state}>
         {this.props.children}
-      </LoginContext.Provider>
+      </AuthContext.Provider>
     );
   }
 }
 
-export default LoginProvider;
+export default AuthProvider;

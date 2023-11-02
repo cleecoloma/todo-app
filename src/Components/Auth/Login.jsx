@@ -1,50 +1,49 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { When } from 'react-if';
+import { AuthContext } from '../../Context/Auth';
 
-import { LoginContext } from './context.js';
+function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
-class Login extends React.Component {
-  static contextType = LoginContext;
+  const auth = useContext(AuthContext);
 
-  constructor(props) {
-    super(props);
-    this.state = { username: '', password: '' };
-  }
-
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    if (e.target.name === 'username') {
+      setUsername(e.target.value);
+    } else if (e.target.name === 'password') {
+      setPassword(e.target.value);
+    }
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    this.context.login(this.state.username, this.state.password);
+    auth.login(username, password);
   };
 
-  render() {
-    return (
-      <>
-        <When condition={this.context.loggedIn}>
-          <button onClick={this.context.logout}>Log Out</button>
-        </When>
+  return (
+    <>
+      <When condition={auth.loggedIn}>
+        <button onClick={auth.logout}>Log Out</button>
+      </When>
 
-        <When condition={!this.context.loggedIn}>
-          <form onSubmit={this.handleSubmit}>
-            <input
-              placeholder='UserName'
-              name='username'
-              onChange={this.handleChange}
-            />
-            <input
-              placeholder='password'
-              name='password'
-              onChange={this.handleChange}
-            />
-            <button>Login</button>
-          </form>
-        </When>
-      </>
-    );
-  }
+      <When condition={!auth.loggedIn}>
+        <form onSubmit={handleSubmit}>
+          <input
+            placeholder='Username'
+            name='username'
+            onChange={handleChange}
+          />
+          <input
+            placeholder='Password'
+            name='password'
+            onChange={handleChange}
+          />
+          <button>Login</button>
+        </form>
+      </When>
+    </>
+  );
 }
 
 export default Login;
