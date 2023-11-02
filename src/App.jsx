@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import SettingsProvider from './Context/Settings';
 import Header from '../src/Components/Header';
 import { MantineProvider } from '@mantine/core';
@@ -24,10 +24,7 @@ function App() {
                   path='/'
                   element={
                     <>
-                      <Auth capability={'read'}>
-                        <Todo />
-                      </Auth>
-                      <Auth capability={'create'}>
+                      <Auth>
                         <Todo />
                       </Auth>
                     </>
@@ -35,7 +32,6 @@ function App() {
                 ></Route>
                 <Route exact path='/Settings' element={<Settings />}></Route>
               </Routes>
-
               <Footer />
             </Router>
           </AuthProvider>
