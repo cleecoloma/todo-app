@@ -19,7 +19,10 @@ const Todo = () => {
   const [defaultValues] = useState({
     difficulty: 4,
   });
-  const [list, setList] = useState([]);
+  const [list, setList] = useState(() => {
+    const savedList = JSON.parse(localStorage.getItem('todoList'));
+    return savedList || [];
+  });
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
   const [currentPage, setCurrentPage] = useState(1);
@@ -29,6 +32,18 @@ const Todo = () => {
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const itemsToDisplay = list.slice(startIndex, endIndex);
+
+  useEffect(() => {
+    const savedList = JSON.parse(localStorage.getItem('todoList'));
+    if (savedList) {
+      setList(savedList);
+    }
+  }, []);
+
+  // Save the list to local storage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(list));
+  }, [list]);
 
   function addItem(item) {
     item.id = uuid();
@@ -61,7 +76,7 @@ const Todo = () => {
     // disable code used to avoid linter warning
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list]);
-
+    console.log('HERES MY SAVED LIST ', list);
   return (
     <div className='todo-container'>
       <div className='todo-header' data-testid='todo-header'>
@@ -70,7 +85,7 @@ const Todo = () => {
         </h1>
         {console.log(incomplete)}
       </div>
-      <Auth capability={'create'}>
+      <Auth capability={['create']}>
         <form onSubmit={handleSubmit}>
           <h2>Add To Do Item</h2>
           <Box maw={340} mx='auto'>
@@ -117,7 +132,6 @@ const Todo = () => {
           </Box>
         </form>
       </Auth>
-
       {isCompleted
         ? itemsToDisplay.map((item, index) => (
             <List key={index} list={item} toggleComplete={toggleComplete} />

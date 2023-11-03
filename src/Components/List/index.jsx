@@ -31,7 +31,7 @@ function List(props) {
           Difficulty: {list.difficulty}
         </Text>
 
-        <Auth capability={'update'}>
+        <Auth capability={["update"]}>
           <Button
             onClick={() => toggleComplete(list.id)}
             variant='light'

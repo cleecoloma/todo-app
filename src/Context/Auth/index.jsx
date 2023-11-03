@@ -38,12 +38,13 @@ function AuthProvider(props) {
     error: null,
   });
 
-  const can = (capability) => {
-    return (
-      state.user &&
-      state.user.capabilities &&
-      state.user.capabilities.includes(capability)
-    );
+  const can = (capabilities) => {
+    if (state.user && state.user.capabilities && Array.isArray(capabilities)) {
+      return capabilities.some((capability) =>
+        state.user.capabilities.includes(capability)
+      );
+    }
+    return false;
   };
 
   const login = async (username, password) => {
@@ -99,7 +100,7 @@ function AuthProvider(props) {
     validateToken(token);
   }, []);
 
-  console.log("HERES THE USER ", state.user.name, state.user.capabilities)
+  console.log('HERES THE USER ', state.user.name, state.user.capabilities);
 
   return (
     <AuthContext.Provider value={{ ...state, can, login, logout }}>

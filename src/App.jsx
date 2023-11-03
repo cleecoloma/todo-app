@@ -24,7 +24,7 @@ function App() {
                   path='/'
                   element={
                     <>
-                      <Auth>
+                      <Auth capability={["create", "read"]}>
                         <Todo />
                       </Auth>
                     </>
