@@ -134,7 +134,7 @@ const Todo = () => {
       </Auth>
       {isCompleted
         ? itemsToDisplay.map((item, index) => (
-            <List key={index} list={item} toggleComplete={toggleComplete} />
+            <List key={index} list={item} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
           ))
         : itemsToDisplay
             .filter((item) => !item.complete)

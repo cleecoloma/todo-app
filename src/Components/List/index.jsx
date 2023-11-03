@@ -1,13 +1,10 @@
 import React from 'react';
-import { Card, Text, Badge, Button } from '@mantine/core';
+import { Card, Text, Badge, Button, CloseButton } from '@mantine/core';
 import './List.scss';
 import Auth from '../Auth/Auth';
 
 function List(props) {
-  const { list, toggleComplete } = props;
-
-  const badgeText = list.complete ? 'Completed' : 'Pending';
-  const badgeColor = list.complete ? 'green' : 'orange';
+  const { list, toggleComplete, deleteItem } = props;
 
   return (
     <div className='list-container'>
@@ -18,9 +15,15 @@ function List(props) {
         radius='md'
         withBorder
       >
-        <Badge className='badge' variant='filled' color={badgeColor}>
-          {badgeText}
-        </Badge>
+        <div className='list-container-header'>
+          <Badge
+            className={`badge ${list.complete ? 'complete' : 'pending'}`}
+            variant='light'
+          >
+            {list.complete ? 'Complete' : 'Pending'}
+          </Badge>
+          <CloseButton onClick={() => deleteItem(list.id)}/>
+        </div>
 
         <Text className='assignee' mt='md' fw={500}>
           {list.assignee}

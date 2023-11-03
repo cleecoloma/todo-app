@@ -29,3 +29,21 @@
 .complete-button {
   margin-top: 1rem;
 }
+
+.badge {
+  &.complete {
+    background-color: green;
+    color: white;
+  }
+
+  &.pending {
+    background-color: orange;
+    color: white;
+  }
+}
+
+.list-container-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
