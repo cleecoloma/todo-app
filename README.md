@@ -8,6 +8,7 @@ Stay organized and boost productivity with our intuitive to-do application. Effo
 
 - To Do List Manager Phase 1: Incorporate configuration settings to the application.
 - To Do List Manager Phase 2: Incorporate configuration settings to the application - Settings Page and Local Storage Functionality.
+- To Do List Manager Phase 3: Adding security and access controls to the application.
 
 
 ## Table of Contents
@@ -34,10 +35,12 @@ To get started with the application, follow these steps:
 > Test: `npm test`
 
 ## UML Diagram
+![UML Diagram Class 34 To Do App Login and Auth](./public/images/todo-app-login-auth.png)
 ![UML Diagram Class 32 To Do App Context Settings](./public/images/todo-app-context-methods.png)
 ![UML Diagram Class 31 To Do App Context Settings](./public/images/todo-app-context-settings.png)
 
 ## PR link
+[PR Link Class 33](https://github.com/cleecoloma/todo-app/pull/3)
 [PR Link Class 32](https://github.com/cleecoloma/todo-app/pull/2)
 [PR Link Class 31](https://github.com/cleecoloma/todo-app/pull/1)
 
