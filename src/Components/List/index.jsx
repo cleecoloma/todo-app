@@ -6,6 +6,9 @@ import Auth from '../Auth/Auth';
 function List(props) {
   const { list, toggleComplete } = props;
 
+  const badgeText = list.complete ? 'Completed' : 'Pending';
+  const badgeColor = list.complete ? 'green' : 'orange';
+
   return (
     <div className='list-container'>
       <Card
@@ -15,8 +18,8 @@ function List(props) {
         radius='md'
         withBorder
       >
-        <Badge className='badge' variant='light'>
-          Complete: {list.complete.toString()}
+        <Badge className='badge' variant='filled' color={badgeColor}>
+          {badgeText}
         </Badge>
 
         <Text className='assignee' mt='md' fw={500}>
@@ -31,7 +34,7 @@ function List(props) {
           Difficulty: {list.difficulty}
         </Text>
 
-        <Auth capability={["update"]}>
+        <Auth capability={['update']}>
           <Button
             onClick={() => toggleComplete(list.id)}
             variant='light'
