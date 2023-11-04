@@ -40,12 +40,13 @@ function Login() {
             onChange={handleChange}
           />
           <Input
+            type='password'
             className='input'
             placeholder='Password'
             name='password'
             onChange={handleChange}
           />
-          <Button type='submit'>Login</Button>
+          <Button type='submit'>Log In</Button>
         </form>
       </When>
     </>

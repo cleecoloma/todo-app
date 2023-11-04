@@ -3,6 +3,7 @@ import './Header.scss';
 import { Navbar, Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import Login from '../Auth/Login';
+import Signup from '../Signup';
 
 function Header() {
   return (
@@ -19,7 +20,10 @@ function Header() {
           </Link>
         </Nav.Item>
       </Nav>
-      <Login />
+      <div className='navbar-buttons'>
+        <Login />
+        <Signup />
+      </div>
     </Navbar>
   );
 }

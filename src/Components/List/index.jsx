@@ -20,9 +20,11 @@ function List(props) {
             className={`badge ${list.complete ? 'complete' : 'pending'}`}
             variant='light'
           >
-            {list.complete ? 'Complete' : 'Pending'}
+            {list.complete ? 'Completed' : 'Pending'}
           </Badge>
-          <CloseButton onClick={() => deleteItem(list.id)}/>
+          <Auth capability={['delete']}>
+            <CloseButton onClick={() => deleteItem(list.id)} />
+          </Auth>
         </div>
 
         <Text className='assignee' mt='md' fw={500}>
