@@ -41,11 +41,7 @@ function Settings() {
           />
         </div>
 
-        <Button
-          className='settings-button'
-          component={Link}
-          to='/'
-        >
+        <Button className='settings-button' component={Link} to='/'>
           Show Updated Todo
         </Button>
       </Card>
