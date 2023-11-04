@@ -40,6 +40,7 @@ function Login() {
             onChange={handleChange}
           />
           <Input
+            type='password'
             className='input'
             placeholder='Password'
             name='password'
