@@ -35,6 +35,20 @@ To get started with the application, follow these steps:
 
 > Test: `npm test`
 
+Signup:
+```text
+  username: {ENTER_NAME}
+  password: {ENTER_PASSWORD}
+  role: {PICK_ROLE}
+```
+Signin
+```text
+  username: {ENTER_NAME}
+  password: {ENTER_PASSWORD}
+```
+
+> Install Auth Server: [To Do API - Auth Server](https://github.com/cleecoloma/todo-api)
+
 ## UML Diagram
 ![UML Diagram Class 34 To Do App API Integration](./public/images/todo-app-auth-server.png)
 ![UML Diagram Class 33 To Do App Login and Auth](./public/images/todo-app-login-auth.png)
