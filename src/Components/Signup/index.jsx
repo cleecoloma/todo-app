@@ -75,8 +75,7 @@ function Signup() {
               placeholder='Pick a role'
               value={role}
               onChange={setRole}
-              data={['Admin', 'Writer', 'User']}
-              defaultValue='User'
+              data={['User', 'Writer', 'Editor', 'Admin' ]}
               clearable
               mb='md'
             />
